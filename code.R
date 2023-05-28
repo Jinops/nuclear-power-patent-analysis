@@ -3,7 +3,8 @@ library(jsonlite)
 #load data
 file_name <- "G21K"
 file_format <- "json"
-data <- fromJSON(txt=paste(file_name,file_format, sep='.'))$patents
+file_path <- "data/"
+data <- fromJSON(txt=sprintf('%s%s.%s',file_path,file_name,file_path))$patents
 sprintf('count of row: %d', nrow(data))
 sprintf('count of column: %d', ncol(data))
 print(colnames(data))
