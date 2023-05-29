@@ -22,33 +22,30 @@ data$country <- sapply(1:nrow(data), function(i) data[i,]$inventors[[1]]$invento
 
 #1 Patent registration by year
 title <- sprintf("Patent registration by year\n(%s)", file_name)
-year_counts <- table(data$year)
-print(year_counts)
-barplot(year_counts, 
+year_table <- table(data$year)
+print(year_table)
+barplot(year_table, 
         main=title, xlab="year", ylab="patent count")
 
 #2 TOP patent inventors' counties
 title <- sprintf("TOP%d patent inventors' counties\n(%s)", max, file_name)
-country_counts <- table(data$country)
-print(country_counts)
-country_counts_sorted <- sort(country_counts, decreasing=TRUE)
-country_counts_top <- country_counts_sorted[1:max]
-print(country_counts_top)
-barplot(country_counts_top, 
+country_table <- table(data$country)
+print(country_table)
+country_table_sorted <- sort(country_table, decreasing=TRUE)
+country_table_top <- country_table_sorted[1:max]
+print(country_table_top)
+barplot(country_table_top, 
         main=title, xlab="country", ylab="count")
 
 #3 TOP countries' patents by year
 title <- sprintf("TOP%d countries' patents by year\n(%s)", max, file_name)
-top_country <- rownames(country_counts_top)
-print(country_counts_top)
-print(typeof(top_country))
-topCountryData <- data[data$country %in% names(country_counts_top), ]
-topCountryData_counts <- table(topCountryData$country, topCountryData$year)
-print(topCountryData_counts)
-colors <- qualitative_hcl(nrow(topCountryData_counts), palette = 'Dynamic')
-barplot(topCountryData_counts, beside = TRUE,
+data_top <- data[data$country %in% names(country_table_top), ]
+country_year_table_top <- table(data_top$country, data_top$year)
+print(country_year_table_top)
+colors <- qualitative_hcl(nrow(country_year_table_top), palette = 'Dynamic')
+barplot(country_year_table_top, beside = TRUE,
         main=title, xlab = "Year", ylab = "Count",
-        legend=rownames(topCountryData_counts),
+        legend=rownames(country_year_table_top),
         col=colors)
 
 dev.off()

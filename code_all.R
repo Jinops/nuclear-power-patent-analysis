@@ -11,5 +11,9 @@ file_names <- list(
 file_names <- append(file_names, 'All')
 
 for(file_name in file_names){
+  print('=====')
+  print(file_name)
+  print('=====')
   source("code.R")
 }
+print('finish!')
