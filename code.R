@@ -1,7 +1,10 @@
 library(jsonlite)
+library(colorspace)
 
 # Load data
-file_name <- "G21K"
+if(is.null(file_name)){
+  file_name <- "G21B"
+}
 data <- fromJSON(txt=paste('datas/',file_name,'.json',sep=''))$patents
 sprintf('count of row: %d', nrow(data))
 sprintf('count of column: %d', ncol(data))
@@ -42,8 +45,10 @@ print(typeof(top_country))
 topCountryData <- data[data$country %in% names(country_counts_top), ]
 topCountryData_counts <- table(topCountryData$country, topCountryData$year)
 print(topCountryData_counts)
+colors <- qualitative_hcl(nrow(topCountryData_counts), palette = 'Dynamic')
 barplot(topCountryData_counts, beside = TRUE,
         main=title, xlab = "Year", ylab = "Count",
-        legend=rownames(topCountryData_counts))
+        legend=rownames(topCountryData_counts),
+        col=colors)
 
 dev.off()
