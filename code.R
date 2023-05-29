@@ -1,8 +1,7 @@
 library(jsonlite)
 
-
 # Load data
-file_name <- "G21B"
+file_name <- "G21K"
 data <- fromJSON(txt=paste('datas/',file_name,'.json',sep=''))$patents
 sprintf('count of row: %d', nrow(data))
 sprintf('count of column: %d', ncol(data))
@@ -18,8 +17,8 @@ max <- 5 # TOP countries number
 data$year <- as.numeric(substr(data$patent_date, 1, 4))
 data$country <- sapply(1:nrow(data), function(i) data[i,]$inventors[[1]]$inventor_country[1])
 
-#1 Total Patents  by year
-title <- sprintf("Total patents by year\n(%s)", file_name)
+#1 Patent registration by year
+title <- sprintf("Patent registration by year\n(%s)", file_name)
 year_counts <- table(data$year)
 print(year_counts)
 barplot(year_counts, 
