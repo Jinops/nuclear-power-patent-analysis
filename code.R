@@ -1,13 +1,18 @@
 library(jsonlite)
 
-#load data
-file_name <- "G21K"
-file_format <- ".json"
-file_path <- "./data/"
-data <- fromJSON(txt=paste(file_path,file_name,file_format, sep=''))$patents
+
+# Load data
+file_name <- "G21B"
+data <- fromJSON(txt=paste('datas/',file_name,'.json',sep=''))$patents
 sprintf('count of row: %d', nrow(data))
 sprintf('count of column: %d', ncol(data))
 print(colnames(data))
+
+# For saving plots as pdf
+pdf(paste('plots/',file_name,'.pdf',sep=''), width= 5, height= 5)
+
+# Definition
+max <- 5 # TOP countries number
 
 # Preprocessing
 data$year <- as.numeric(substr(data$patent_date, 1, 4))
@@ -22,7 +27,6 @@ barplot(year_counts,
 
 #2 TOP patent inventors' counties
 title <- sprintf("TOP%d patent inventors' counties\n(%s)", max, file_name)
-max <- 5
 country_counts <- table(data$country)
 print(country_counts)
 country_counts_sorted <- sort(country_counts, decreasing=TRUE)
@@ -43,3 +47,4 @@ barplot(topCountryData_counts, beside = TRUE,
         main=title, xlab = "Year", ylab = "Count",
         legend=rownames(topCountryData_counts))
 
+dev.off()
