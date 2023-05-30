@@ -18,6 +18,7 @@ max <- 5 # TOP countries number
 
 # Preprocessing
 data$year <- as.numeric(substr(data$patent_date, 1, 4))
+# app year: sapply(1:nrow(data), function(i) as.numeric(substr(data[i,]$applications[[1]]$app_date,1, 4)))
 data$country <- sapply(1:nrow(data), function(i) data[i,]$inventors[[1]]$inventor_country[1])
 
 #1 Patent registration by year
