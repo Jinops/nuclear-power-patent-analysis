@@ -10,9 +10,9 @@ file_names <- list(
 )
 file_names <- append(file_names, 'All')
 
-for(file_name in file_names){
+for(file_name_loop in file_names){
   print('=====')
-  print(file_name)
+  print(file_name_loop)
   print('=====')
   source("code.R")
 }
