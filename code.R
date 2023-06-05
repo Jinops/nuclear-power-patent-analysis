@@ -1,6 +1,7 @@
 library(jsonlite)
 library(colorspace)
 
+file_name <- "All"
 # Load data
 if(is.null(file_name)){
   file_name <- "G21B"
@@ -8,7 +9,7 @@ if(is.null(file_name)){
 data <- fromJSON(txt=paste('datas/',file_name,'.json',sep=''))$patents
 sprintf('count of row: %d', nrow(data))
 sprintf('count of column: %d', ncol(data))
-print(colnames(data))
+print(data$text[1])
 
 # For saving plots as pdf
 pdf(paste('plots/',file_name,'.pdf',sep=''), width= 5, height= 5)
@@ -24,6 +25,8 @@ for (i in 1:nrow(data)){
   country <- data[i,]$assignees[[1]]$assignee_country[1]
   if (is.na(country))
     country <- data[i,]$inventors[[1]]$inventor_country[1]
+  if (is.na(country))
+    country <- 'unknown'
   data$country[i] <- country
 }
 print(data$country)
@@ -58,3 +61,5 @@ barplot(country_year_table_top, beside = TRUE,
 
 dev.off()
 
+#4 topic_model
+source("topic_model.R")
