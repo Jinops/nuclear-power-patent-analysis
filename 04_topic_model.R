@@ -7,7 +7,7 @@ library(stringr)
 library(stopwords)
 library(tm)
 
-data_topic <- data[data$app_year >= 2019,] # for test
+data_topic <- data
 top_countries = names(country_table_top)
 
 data_topic$text <- paste(data_topic$patent_title, " ", data_topic$patent_abstract)
@@ -33,45 +33,40 @@ myout <-prepDocuments(mypreprocess$documents,
                       lower.thresh = nrow(data_topic)/100)
 myout$vocab
 
-#add stopwords if need
-#custom_add = c('10', '100', '11', '12', '14', '16', '20', '40', '50', 'ii')
-#stopwords <- c(csw, custom_add)
+#add stopwords
+custom_add <- c('ad','analyz','annular','appli','applic','caus','characterist','equal','equip','euv','event','frequenc','height','high','higher','introduc','involv','length','level','make','oppos','opposit','paramet','prefer','requir')
+custom_add <- c(custom_add, 'includ', 'total', 'tool', 'valu', 'width', 'set', 'result', 'plus', 'measur', 'later', 'includ', 'high', 'enabl')
+stopwords <- c(stopwords, custom_add)
+print(custom_add)
+
+mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
+                              , lowercase = TRUE
+                              , removepunctuation = TRUE
+                              , customstopwords = stopwords
+                              , removestopwords = TRUE
+                              , removenumbers = TRUE
+                              , stem = TRUE
+                              , wordLengths = c(2,Inf))
+
+myout <-prepDocuments(mypreprocess$documents,
+                      mypreprocess$vocab, mypreprocess$meta,
+                      lower.thresh = nrow(data_topic)/100)
+myout$vocab
 
 #make new dummy variable
-for(country in unique(myout$meta$country)){
-  if(country %in% top_countries){
-    myout$meta[country] <- ifelse(myout$meta$country == country, 1, 0)
-  } 
+for(country in top_countries){
+  myout$meta[country] <- ifelse(myout$meta$country == country, 1, 0)
 }
-for (i in 1:nrow(myout$meta)){
-  print(myout$meta[i,]$country)
-
-}
+myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
 
 # TODO: generate equation
 #print(paste(unique(myout$meta$country), sep='+'))
 #regression_equation = paste(unique(myout$meta$country), sep='+')
 #prevalence = parse(text=paste('~',regression_equation)[[1]])
 prevalence =  ~ app_year + US + JP + KR + FR + DE 
-print(prevalence)
-print(myout)
-
-
-#set number of topics for stm
-topic_count = 4
-#STM
-mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
-             K=topic_count,
-             prevalence = prevalence,
-             seed = 16)
-labelTopics(mystm, topics=1:topic_count, n=7)
-
-plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
-plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
-
 
 # Find best topic count
-topic_counts <- c(10, 15, 20) 
+topic_counts <- c(10, 30, 50) 
 kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
                    topic_counts, 
                    prevalence = prevalence,
@@ -80,20 +75,20 @@ plot(kresult)
 
 
 #STM
-topic_count <- 15
+topic_count <- 30
 mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
              K=topic_count,
              prevalence = prevalence,
              seed = 16)
 
-plot(mystm, type = "summary", text.cex = 1)
+plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
+plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
 labelTopics(mystm, topics=1:topic_count, n=7)
 
-#myresult <- estimateEffect(prevalence, mystm, myout$meta) #difference??
+
 print(names(myout$meta))
-print(myout$meta$app_year)
-myresult <- estimateEffect(c(1:topic_count) ~ app_year + US + JP+ KR + FR, mystm, myout$meta)
-#myresult <- estimateEffect(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE , mystm, myout$meta)
+reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +  + app_year:DE
+myresult <- estimateEffect(reg, mystm, myout$meta)
 result = summary(myresult)
 print(result[3]$tables)
 write.csv(result[3]$tables,file=paste0("effect_",Sys.time(),".csv"))
