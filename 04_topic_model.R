@@ -36,8 +36,9 @@ myout$vocab
 #add stopwords
 custom_add <- c('ad','analyz','annular','appli','applic','caus','characterist','equal','equip','euv','event','frequenc','height','high','higher','introduc','involv','length','level','make','oppos','opposit','paramet','prefer','requir')
 custom_add <- c(custom_add, 'includ', 'total', 'tool', 'valu', 'width', 'set', 'result', 'plus', 'measur', 'later', 'includ', 'high', 'enabl')
-stopwords <- c(stopwords, custom_add)
+custom_add <- c(custom_add, 'method', 'contain', 'target', 'control', 'unit', 'end', 'imag', 'object')
 print(custom_add)
+stopwords <- c(stopwords, custom_add)
 
 mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
                               , lowercase = TRUE
@@ -91,12 +92,12 @@ reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_y
 myresult <- estimateEffect(reg, mystm, myout$meta)
 result = summary(myresult)
 print(result[3]$tables)
-write.csv(result[3]$tables,file=paste0("effect_",Sys.time(),".csv"))
+write.csv(result[3]$tables,file=paste0("results/effect_",Sys.time(),".csv"))
 
 #beta
 logbeta <- as.data.frame(mystm[["beta"]][["logbeta"]][[1]])
 beta <- as.data.frame(exp(logbeta))
 colnames(beta) <- myout$vocab
 colnames(logbeta) <- myout$vocab
-write.csv(beta, file=paste0("beta_",Sys.time(),".csv"), row.names=TRUE)
-write.csv(logbeta, file=paste0("logbeta_",Sys.time(),".csv"), row.names=TRUE)
+write.csv(beta, file=paste0("results/beta_",Sys.time(),".csv"), row.names=TRUE)
+write.csv(logbeta, file=paste0("results/logbeta_",Sys.time(),".csv"), row.names=TRUE)
