@@ -40,8 +40,8 @@ source("02_patent_by_year.R")
 
 source("03_top_country_by_year.R")
 
-source("04_topic_model.R")
-
 if(is_pdf){
   dev.off()
 }
+
+source("04_topic_model.R")
