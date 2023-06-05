@@ -5,8 +5,11 @@ library(stm)
 library(stringr)
 library(stopwords)
 
-data$text <- paste(data$patent_title, " ", data$patent_abstract)
-data$text <- str_replace_all(data$text, '-', ' a ')
+data_edited <- data_top[data_top$app_year == 2016,]
+top_country <- unique(data_edited$country)
+
+data_edited$text <- paste(data_edited$patent_title, " ", data_edited$patent_abstract)
+data_edited$text <- str_replace_all(data_edited$text, '-', ' a ')
 
 #stopwords from the stopword library
 stopwords <- stopwords(language = "en", source = "smart")
@@ -16,7 +19,7 @@ stopwords <- c(stopwords, custom)
 #textProcessor
 install.packages("tm")
 library(tm)
-mypreprocess <- textProcessor(data$text, metadata = data[c("country")]
+mypreprocess <- textProcessor(data_edited$text, metadata = data_edited[c("country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
                               , customstopwords = stopwords
@@ -36,17 +39,18 @@ myout$vocab
 #stopwords <- c(csw, custom_add)
 
 #make new dummy variable
-print(table(myout$meta$country))
-myout$meta$US <- ifelse(myout$meta$country == 'US', 1, 0)
-myout$meta$JP <- ifelse(myout$meta$country == 'JP', 1, 0)
-myout$meta$DE <- ifelse(myout$meta$country == 'DE', 1, 0)
-myout$meta$FR <- ifelse(myout$meta$country == 'FR', 1, 0)
-myout$meta$KR <- ifelse(myout$meta$country == 'KR', 1, 0)
+for(country in unique(myout$meta$country)){
+  myout$meta[country] <- ifelse(myout$meta$country == country, 1, 0)
+}
 
 #set number of topics for stm
 topic_count = 4
-prevalence =  ~ US + JP + DE + FR + KR
-
+# TODO: generate equation
+#print(paste(unique(myout$meta$country), sep='+'))
+#regression_equation = paste(unique(myout$meta$country), sep='+')
+#prevalence = parse(text=paste('~',regression_equation)[[1]])
+prevalence =  ~ US + JP + KR + FR + DE
+print(prevalence)
 print(myout)
 #STM
 mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
@@ -78,8 +82,8 @@ mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
 plot(mystm, type = "summary", text.cex = 1)
 labelTopics(mystm, topics=1:topic_count, n=7)
 
-myresult <- estimateEffect(prevalence, mystm, myout$meta) #difference??
-#myresult <- estimateEffect(c(1:topic_count) ~ US + JP + DE + FR + KR, mystm, myout$meta) #difference??
+#myresult <- estimateEffect(prevalence, mystm, myout$meta) #difference??
+myresult <- estimateEffect(c(1:topic_count) ~ US + JP + KR + FR + DE, mystm, myout$meta) #difference??
 result = summary(myresult)
 print(result[3]$tables)
 write.csv(result[3]$tables,file=paste0("effect_",Sys.time(),".csv"))

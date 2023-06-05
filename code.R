@@ -1,10 +1,12 @@
 library(jsonlite)
 library(colorspace)
 
+# Parameters
 file_name <- "All"
 is_pdf <- TRUE
 max <- 5 # TOP countries number
 
+# For script
 if(exists('file_name_loop')){
   file_name <- file_name_loop
 }
@@ -38,7 +40,7 @@ source("02_patent_by_year.R")
 
 source("03_top_country_by_year.R")
 
-source("topic_model.R")
+source("04_topic_model.R")
 
 if(is_pdf){
   dev.off()
