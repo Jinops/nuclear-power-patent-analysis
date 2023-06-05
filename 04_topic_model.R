@@ -5,7 +5,11 @@ install.packages("stopwords")
 library(stm)
 library(stringr)
 library(stopwords)
-library(tm)
+
+prevalence =  ~ app_year + US + JP + KR + FR + DE 
+reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE
+#reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +  + app_year:DE
+#reg = lm(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE  + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE, data=myout$meta)
 
 data_topic <- data
 top_countries = names(country_table_top)
@@ -14,10 +18,11 @@ data_topic$text <- paste(data_topic$patent_title, " ", data_topic$patent_abstrac
 data_topic$text <- str_replace_all(data_topic$text, '-', ' a ')
 
 stopwords <- stopwords(language = "en", source = "smart")
-custom <- c('invention', 'thereof', 'therefore', 'therefrom')
-stopwords <- c(stopwords, custom)
+stopwords_add <- c('invention', 'thereof', 'therefore', 'therefrom')
+stopwords <- c(stopwords, stopwords_add)
 
 # Preprocessing - textProcessor
+library(tm)
 mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
@@ -27,18 +32,20 @@ mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year
                               , stem = TRUE
                               , wordLengths = c(2,Inf))
 
-# Get output
+# Get vocab
 myout <-prepDocuments(mypreprocess$documents,
                       mypreprocess$vocab, mypreprocess$meta,
                       lower.thresh = nrow(data_topic)/100)
 myout$vocab
 
-#add stopwords
-custom_add <- c('ad','analyz','annular','appli','applic','caus','characterist','equal','equip','euv','event','frequenc','height','high','higher','introduc','involv','length','level','make','oppos','opposit','paramet','prefer','requir')
-custom_add <- c(custom_add, 'includ', 'total', 'tool', 'valu', 'width', 'set', 'result', 'plus', 'measur', 'later', 'includ', 'high', 'enabl')
-custom_add <- c(custom_add, 'method', 'contain', 'target', 'control', 'unit', 'end', 'imag', 'object')
-print(custom_add)
-stopwords <- c(stopwords, custom_add)
+# Add stopwords
+stopwords_add <- c('ad','analyz','annular','appli','applic','caus','characterist','equal','equip','euv','event','frequenc','height','high','higher','introduc','involv','length','level','make','oppos','opposit','paramet','prefer','requir')
+stopwords_add <- c(stopwords_add, 'includ', 'total', 'tool', 'valu', 'width', 'set', 'result', 'plus', 'measur', 'later', 'includ', 'high', 'enabl')
+stopwords_add <- c(stopwords_add, 'method', 'contain', 'target', 'control', 'unit', 'end', 'imag', 'object')
+stopwords_add <- c(stopwords_add, 'system','product','process','contain','case','measur','determin','base')
+
+print(stopwords_add)
+stopwords <- c(stopwords, stopwords_add)
 
 mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
                               , lowercase = TRUE
@@ -49,22 +56,17 @@ mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year
                               , stem = TRUE
                               , wordLengths = c(2,Inf))
 
+# Get vocab
 myout <-prepDocuments(mypreprocess$documents,
                       mypreprocess$vocab, mypreprocess$meta,
                       lower.thresh = nrow(data_topic)/100)
 myout$vocab
 
-#make new dummy variable
+# Dummy variables for countries
 for(country in top_countries){
   myout$meta[country] <- ifelse(myout$meta$country == country, 1, 0)
 }
 myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
-
-# TODO: generate equation
-#print(paste(unique(myout$meta$country), sep='+'))
-#regression_equation = paste(unique(myout$meta$country), sep='+')
-#prevalence = parse(text=paste('~',regression_equation)[[1]])
-prevalence =  ~ app_year + US + JP + KR + FR + DE 
 
 # Find best topic count
 topic_counts <- c(10, 30, 50) 
@@ -74,8 +76,7 @@ kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
                    seed = 16)
 plot(kresult)
 
-
-#STM
+# STM
 topic_count <- 30
 mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
              K=topic_count,
@@ -86,15 +87,12 @@ plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
 plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
 labelTopics(mystm, topics=1:topic_count, n=7)
 
-
-print(names(myout$meta))
-reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +  + app_year:DE
 myresult <- estimateEffect(reg, mystm, myout$meta)
 result = summary(myresult)
 print(result[3]$tables)
 write.csv(result[3]$tables,file=paste0("results/effect_",Sys.time(),".csv"))
 
-#beta
+# Beta
 logbeta <- as.data.frame(mystm[["beta"]][["logbeta"]][[1]])
 beta <- as.data.frame(exp(logbeta))
 colnames(beta) <- myout$vocab

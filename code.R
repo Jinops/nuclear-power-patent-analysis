@@ -3,7 +3,7 @@ library(colorspace)
 
 # Parameters
 file_name <- "All"
-is_pdf <- TRUE
+is_pdf <- FALSE
 max <- 5 # TOP countries number
 
 # For script
@@ -21,9 +21,9 @@ sprintf('count of column: %d', ncol(data))
 
 # Preprocessing
 patent_year <- as.numeric(substr(data$patent_date, 1, 4))
-app_year <- sapply(1:nrow(data), function(i) as.numeric(substr(data[i,]$applications[[1]]$app_date,1, 4)))
+application_year <- sapply(1:nrow(data), function(i) as.numeric(substr(data[i,]$applications[[1]]$app_date,1, 4)))
 data$year <- patent_year
-data$app_year <- app_year
+data$app_year <- application_year
 
 for (i in 1:nrow(data)){
   country <- data[i,]$assignees[[1]]$assignee_country[1]
