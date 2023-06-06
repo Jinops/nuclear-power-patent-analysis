@@ -4,7 +4,7 @@ library(stopwords)
 
 prevalence =  ~ app_year + US + JP + KR + FR + DE 
 reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE
-reg_cross = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +  + app_year:DE
+reg_cross = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +app_year:DE
 #reg_cross = lm(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE  + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE, data=myout$meta)
 
 data_topic <- data
