@@ -4,7 +4,7 @@ library(stopwords)
 
 prevalence =  ~ app_year + US + JP + KR + FR + DE 
 reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE
-reg_cross = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +app_year:DE
+reg_cross = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE
 #reg_cross = lm(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE  + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE, data=myout$meta)
 
 data_topic <- data
@@ -35,17 +35,21 @@ myout <-prepDocuments(mypreprocess$documents,
 myout$vocab
 
 # Add stopwords
-stopwords_add <- c('ad','analyz','annular','appli','applic','caus','characterist','equal','equip','euv','event','frequenc','height','high','higher','introduc','involv','length','level','make','oppos','opposit','paramet','prefer','requir')
+stopwords_add <- c(stopwords_add, 'ad','analyz','annular','appli','applic','caus','characterist','equal','equip','euv','event','frequenc','height','high','higher','introduc','involv','length','level','make','oppos','opposit','paramet','prefer','requir')
 stopwords_add <- c(stopwords_add, 'includ', 'total', 'tool', 'valu', 'width', 'set', 'result', 'plus', 'measur', 'later', 'includ', 'high', 'enabl')
 stopwords_add <- c(stopwords_add, 'method', 'contain', 'target', 'control', 'unit', 'end', 'imag', 'object')
 stopwords_add <- c(stopwords_add, 'system','product','process','contain','case','measur','determin','base')
+stopwords_add <- c(stopwords_add, 'achiev', 'allow', 'ad', 'accommod', 'achiev', 'anim', 'acquir', 'actuat', 'adjac', 'agent', 'altern', 'allow', 'analysi', 'andor', 'angl', 'appli', 'applic', 'aspect', 'averag', 'capabl', 'bundl', 'caus', 'caviti', 'circumferenti')
+stopwords_add <- c(stopwords_add, "oper",  "oppos","paramet","posit",  "primari","receiv", "propag","pre" , "reduc")
+stopwords_add <- c(stopwords_add, "end", "ensur", "extrem", "exemplari", "fast", "hous", "general", "group")
+stopwords_add <- c(stopwords_add, "comput", "conduct", "contrast", "cost", "data", "differ", "display", "continu", "critic", "due") 
+stopwords_add <- c(stopwords_add, "inside", "intense", "interior", "introduc", "later", "lock", "longitudin", "main", "mean")
+stopwords <- c(stopwords, stopwords_add) 
 
-print(stopwords_add)
-stopwords <- c(stopwords, stopwords_add)
 mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
-                              , customstopwords = stopwords
+                              , customstopwords = stopwords #TODO: it may not work
                               , removestopwords = TRUE
                               , removenumbers = TRUE
                               , stem = TRUE
@@ -56,7 +60,7 @@ myout <-prepDocuments(mypreprocess$documents,
                       mypreprocess$vocab, mypreprocess$meta,
                       lower.thresh = nrow(data_topic)/100)
 myout$vocab
-#capture.output(myout$vocab, file = "vocab.txt")
+capture.output(myout$vocab, file=paste0("results/vocab",Sys.time(),".txt"))
 
 # Dummy variables for countries
 for(country in top_countries){
