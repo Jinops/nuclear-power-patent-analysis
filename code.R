@@ -18,6 +18,7 @@ if(is_pdf){
 data <- fromJSON(txt=paste0('datas/',file_name,'.json'))$patents
 sprintf('count of row: %d', nrow(data))
 sprintf('count of column: %d', ncol(data))
+print(names(data))
 
 # Preprocessing
 patent_year <- as.numeric(substr(data$patent_date, 1, 4))

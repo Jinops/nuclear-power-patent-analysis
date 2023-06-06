@@ -1,15 +1,11 @@
-install.packages("stm")
-install.packages("stringr")
-install.packages("tm")
-install.packages("stopwords")
 library(stm)
 library(stringr)
 library(stopwords)
 
 prevalence =  ~ app_year + US + JP + KR + FR + DE 
 reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE
-#reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +  + app_year:DE
-#reg = lm(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE  + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE, data=myout$meta)
+reg_cross = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR +  + app_year:DE
+#reg_cross = lm(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE  + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE, data=myout$meta)
 
 data_topic <- data
 top_countries = names(country_table_top)
@@ -46,7 +42,6 @@ stopwords_add <- c(stopwords_add, 'system','product','process','contain','case',
 
 print(stopwords_add)
 stopwords <- c(stopwords, stopwords_add)
-
 mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
@@ -61,6 +56,7 @@ myout <-prepDocuments(mypreprocess$documents,
                       mypreprocess$vocab, mypreprocess$meta,
                       lower.thresh = nrow(data_topic)/100)
 myout$vocab
+#capture.output(myout$vocab, file = "vocab.txt")
 
 # Dummy variables for countries
 for(country in top_countries){
@@ -87,10 +83,15 @@ plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
 plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
 labelTopics(mystm, topics=1:topic_count, n=7)
 
-myresult <- estimateEffect(reg, mystm, myout$meta)
-result = summary(myresult)
+estimate <- estimateEffect(reg, mystm, myout$meta)
+result = summary(estimate)
 print(result[3]$tables)
 write.csv(result[3]$tables,file=paste0("results/effect_",Sys.time(),".csv"))
+
+estimate_cross <- estimateEffect(reg_cross, mystm, myout$meta)
+result_cross = summary(estimate_cross)
+print(result_cross[3]$tables)
+write.csv(result_cross[3]$tables,file=paste0("results/effect_cross_",Sys.time(),".csv"))
 
 # Beta
 logbeta <- as.data.frame(mystm[["beta"]][["logbeta"]][[1]])
