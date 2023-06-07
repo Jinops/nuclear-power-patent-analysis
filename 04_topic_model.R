@@ -104,3 +104,9 @@ colnames(beta) <- myout$vocab
 colnames(logbeta) <- myout$vocab
 write.csv(beta, file=paste0("results/beta_",Sys.time(),".csv"), row.names=TRUE)
 write.csv(logbeta, file=paste0("results/logbeta_",Sys.time(),".csv"), row.names=TRUE)
+
+# Theta
+theta <- as.data.frame(mystm[["theta"]])
+theta <- cbind(theta, data["patent_title"], data["app_year"], data["country"])
+write.csv(theta, file=paste0("results/theta_",Sys.time(),".csv"), row.names=TRUE)
+

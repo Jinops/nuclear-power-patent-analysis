@@ -45,4 +45,4 @@ if(is_pdf){
   dev.off()
 }
 
-source("04_topic_model.R")
+#source("04_topic_model.R")
