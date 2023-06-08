@@ -80,7 +80,6 @@ myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
 # plot(kresult)
 
 # STM
-topic_count <- 30
 mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
              K=topic_count,
              prevalence = prevalence,
@@ -90,7 +89,7 @@ plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
 
 # topic
 topics = labelTopics(mystm, topics=1:topic_count, n=7)
-topics
+print(topics)
 sink(file=paste0(result_path, 'topic.txt'))
 topics
 sink()
@@ -106,6 +105,9 @@ estimate_cross <- estimateEffect(reg_cross, mystm, myout$meta)
 result_cross = summary(estimate_cross)
 reg_cross_result = result[3]$tables
 write.csv(reg_result, file=paste0(result_path, "reg_cross.csv"))
+sink(file=paste0(result_path, "reg_cross.txt"))
+reg_cross_result
+sink()
 
 # Beta
 logbeta <- as.data.frame(mystm[["beta"]][["logbeta"]][[1]])

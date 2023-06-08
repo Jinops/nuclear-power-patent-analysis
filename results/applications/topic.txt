@@ -1,150 +1,40 @@
 Topic 1 Top Words:
- 	 Highest Prob: fuel, rod, assembl, nuclear, element, structur, includ 
- 	 FREX: rod, fuel, assembl, moder, element, bundl, burnabl 
- 	 Lift: burnabl, spacer, rod, bundl, fuel, moder, enrich 
- 	 Score: fuel, rod, burnabl, assembl, nuclear, moder, core 
+ 	 Highest Prob: fuel, nuclear, reactor, core, assembl, rod, salt 
+ 	 FREX: fuel, salt, fission, rod, core, nuclear, molten 
+ 	 Lift: burnabl, fuel, fission, molten, reactiv, salt, moder 
+ 	 Score: fuel, burnabl, reactor, core, rod, nuclear, assembl 
 Topic 2 Top Words:
- 	 Highest Prob: compon, embodi, form, addit, amount, activ, weight 
- 	 FREX: compon, amount, embodi, weight, prefer, mass, activ 
- 	 Lift: mass, prefer, amount, compon, weight, subject, embodi 
- 	 Score: mass, compon, weight, amount, addit, embodi, activ 
+ 	 Highest Prob: beam, generat, neutron, energi, electron, irradi, sourc 
+ 	 FREX: beam, laser, magnet, electron, reflect, acceler, energi 
+ 	 Lift: mass, proton, acceler, extrem, laser, mirror, ultraviolet 
+ 	 Score: beam, mass, electron, magnet, laser, energi, optic 
 Topic 3 Top Words:
- 	 Highest Prob: signal, measur, determin, detect, base, sensor, includ 
- 	 FREX: signal, measur, sensor, determin, coil, respons, calcul 
- 	 Lift: coil, indic, signal, calcul, sensor, respons, inform 
- 	 Score: coil, signal, measur, determin, detect, indic, sensor 
+ 	 Highest Prob: includ, oper, signal, configur, measur, base, power 
+ 	 FREX: signal, measur, modul, determin, state, output, sensor 
+ 	 Lift: coil, indic, signal, measur, input, sensor, inform 
+ 	 Score: coil, signal, measur, determin, detect, output, plant 
 Topic 4 Top Words:
- 	 Highest Prob: radiat, shield, materi, region, sheet, protect, fiber 
- 	 FREX: shield, sheet, region, attenu, fiber, radiat, protect 
- 	 Lift: sheet, attenu, shield, patient, fiber, region, protect 
- 	 Score: sheet, shield, radiat, materi, region, fiber, attenu 
+ 	 Highest Prob: radiat, ray, shield, imag, includ, sourc, detector 
+ 	 FREX: radiat, imag, ray, collim, shield, scintil, sheet 
+ 	 Lift: collim, imag, panel, sheet, radiat, scintil, ray 
+ 	 Score: sheet, ray, radiat, imag, collim, shield, scintil 
 Topic 5 Top Words:
- 	 Highest Prob: radioact, solut, wast, step, resin, includ, acid 
- 	 FREX: solut, acid, radioact, resin, wast, decontamin, mixtur 
- 	 Lift: acid, decontamin, solut, adsorb, aqueous, radionuclid, compound 
- 	 Score: acid, solut, wast, radioact, resin, decontamin, organ 
+ 	 Highest Prob: contain, materi, liquid, radioact, wast, storag, includ 
+ 	 FREX: radioact, wast, liquid, solut, storag, isotop, acid 
+ 	 Lift: acid, adsorb, dissolv, treat, radioact, aqueous, contamin 
+ 	 Score: acid, wast, solut, radioact, liquid, ion, contain 
 Topic 6 Top Words:
- 	 Highest Prob: tube, outer, seal, plug, port, upper, rotat 
- 	 FREX: outer, plug, tube, port, seal, fill, upper 
- 	 Lift: plug, outer, port, access, seal, fill, tube 
- 	 Score: plug, tube, outer, seal, port, rotat, upper 
+ 	 Highest Prob: portion, includ, surfac, bodi, plate, tube, structur 
+ 	 FREX: plate, upper, guid, top, portion, open, nozzl 
+ 	 Lift: plug, protrud, flang, guid, hole, top, peripher 
+ 	 Score: plug, upper, rotat, guid, plate, top, portion 
 Topic 7 Top Words:
- 	 Highest Prob: heat, reactor, generat, power, cool, exchang, safeti 
- 	 FREX: heat, safeti, circul, exchang, section, cool, generat 
- 	 Lift: class, safeti, seismic, heat, turbin, reliabl, emerg 
- 	 Score: class, heat, exchang, power, safeti, cool, reactor 
+ 	 Highest Prob: reactor, heat, vessel, cool, power, generat, fluid 
+ 	 FREX: heat, vessel, cool, steam, fluid, pipe, safeti 
+ 	 Lift: class, turbin, steam, safeti, seismic, heat, pipe 
+ 	 Score: vessel, reactor, class, steam, cool, heat, pipe 
 Topic 8 Top Words:
- 	 Highest Prob: materi, coat, composit, particl, ceram, alloy, clad 
- 	 FREX: ceram, coat, alloy, carbid, matrix, composit, zirconium 
- 	 Lift: tungsten, carbid, ceram, cr, zirconium, zr, matrix 
- 	 Score: coat, tungsten, ceram, alloy, particl, carbid, clad 
-Topic 9 Top Words:
- 	 Highest Prob: materi, method, irradi, system, provid, includ, separ 
- 	 FREX: method, system, insul, interfac, porous, desir, irradi 
- 	 Lift: porous, interfac, insul, method, desir, optim, captur 
- 	 Score: porous, method, irradi, system, materi, insul, fissil 
-Topic 10 Top Words:
- 	 Highest Prob: surfac, form, film, includ, shape, graphit, oxid 
- 	 FREX: surfac, film, graphit, carbon, thick, curv, conduct 
- 	 Lift: film, surfac, graphit, carbon, curv, maximum, thick 
- 	 Score: film, surfac, graphit, carbon, oxid, charg, curv 
-Topic 11 Top Words:
- 	 Highest Prob: ray, imag, detector, sampl, collim, sourc, optic 
- 	 FREX: ray, imag, sampl, collim, diffract, crystal, detector 
- 	 Lift: diffract, ray, sampl, imag, crystal, incid, intens 
- 	 Score: ray, imag, detector, collim, diffract, sampl, optic 
-Topic 12 Top Words:
- 	 Highest Prob: energi, reaction, modul, generat, hydrogen, produc, atom 
- 	 FREX: reaction, energi, hydrogen, modul, medium, fusion, engin 
- 	 Lift: medium, fusion, reaction, hydrogen, energi, modul, initi 
- 	 Score: medium, energi, reaction, modul, hydrogen, atom, engin 
-Topic 13 Top Words:
- 	 Highest Prob: power, electr, plant, convert, output, generat, sourc 
- 	 FREX: electr, power, plant, convert, electrod, output, inert 
- 	 Lift: inert, electrod, voltag, plant, convert, electr, power 
- 	 Score: inert, power, electr, plant, output, convert, electrod 
-Topic 14 Top Words:
- 	 Highest Prob: liquid, gas, coolant, valv, line, pressur, devic 
- 	 FREX: liquid, valv, gas, inject, line, pump, coolant 
- 	 Lift: dissolv, inject, liquid, valv, gas, line, pump 
- 	 Score: dissolv, liquid, valv, coolant, gas, pressur, pump 
-Topic 15 Top Words:
- 	 Highest Prob: layer, substrat, scintil, includ, panel, multilay, reflect 
- 	 FREX: substrat, scintil, layer, multilay, panel, phosphor, reflect 
- 	 Lift: scintil, substrat, multilay, phosphor, layer, panel, barrier 
- 	 Score: scintil, layer, substrat, multilay, panel, phosphor, reflect 
-Topic 16 Top Words:
- 	 Highest Prob: fuel, nuclear, spent, storag, cask, transport, assembl 
- 	 FREX: spent, cask, transport, work, storag, pool, store 
- 	 Lift: cask, spent, work, site, cycl, transport, canist 
- 	 Score: spent, cask, fuel, storag, canist, pool, transport 
-Topic 17 Top Words:
- 	 Highest Prob: light, laser, optic, plasma, configur, chamber, beam 
- 	 FREX: laser, light, plasma, optic, ultraviolet, mirror, extrem 
- 	 Lift: extrem, laser, ultraviolet, mirror, plasma, light, focus 
- 	 Score: laser, light, optic, plasma, ultraviolet, mirror, reflect 
-Topic 18 Top Words:
- 	 Highest Prob: channel, plural, plate, primari, side, defin, face 
- 	 FREX: channel, plate, face, defin, primari, secondari, cylindr 
- 	 Lift: face, channel, plate, defin, circumferenti, secondari, cylindr 
- 	 Score: face, channel, plate, primari, side, secondari, defin 
-Topic 19 Top Words:
- 	 Highest Prob: portion, assembl, support, structur, guid, nozzl, includ 
- 	 FREX: guid, support, portion, nozzl, bottom, wall, insert 
- 	 Lift: actuat, flang, guid, hollow, support, nozzl, bottom 
- 	 Score: actuat, guid, portion, assembl, nozzl, support, top 
-Topic 20 Top Words:
- 	 Highest Prob: contain, water, cool, pipe, air, space, discharg 
- 	 FREX: contain, air, water, cool, discharg, build, tank 
- 	 Lift: term, air, build, contain, discharg, accommod, water 
- 	 Score: contain, term, cool, water, pipe, tank, air 
-Topic 21 Top Words:
- 	 Highest Prob: metal, temperatur, nuclear, step, uranium, pellet, manufactur 
- 	 FREX: metal, uranium, densiti, temperatur, pellet, powder, compact 
- 	 Lift: compact, densiti, metal, uranium, fulli, powder, temperatur 
- 	 Score: compact, metal, temperatur, uranium, pellet, sinter, step 
-Topic 22 Top Words:
- 	 Highest Prob: reactor, vessel, core, pressur, nuclear, includ, locat 
- 	 FREX: vessel, pressur, reactor, core, instrument, pin, locat 
- 	 Lift: pin, vessel, instrument, pressur, featur, boil, reactor 
- 	 Score: vessel, reactor, pin, core, pressur, instrument, steam 
-Topic 23 Top Words:
- 	 Highest Prob: bodi, part, cover, weld, hole, generat, residu 
- 	 FREX: bodi, cover, weld, part, residu, hole, adjust 
- 	 Lift: residu, bodi, cover, weld, part, hole, manner 
- 	 Score: residu, bodi, part, weld, cover, hole, steam 
-Topic 24 Top Words:
- 	 Highest Prob: reactor, core, salt, nuclear, fuel, neutron, molten 
- 	 FREX: salt, core, molten, fission, reactiv, reactor, neutron 
- 	 Lift: salt, molten, reactiv, critic, fission, reflector, exemplari 
- 	 Score: salt, molten, reactor, core, fuel, neutron, fission 
-Topic 25 Top Words:
- 	 Highest Prob: electron, compris, beam, hous, chamber, vacuum, element 
- 	 FREX: electron, hous, vacuum, window, chamber, compris, caviti 
- 	 Lift: window, electron, vacuum, hous, carrier, mean, caviti 
- 	 Score: window, electron, beam, chamber, vacuum, hous, caviti 
-Topic 26 Top Words:
- 	 Highest Prob: devic, posit, includ, rotat, drive, move, configur 
- 	 FREX: drive, move, inspect, rotat, posit, devic, frame 
- 	 Lift: motor, movabl, inspect, drive, remot, move, frame 
- 	 Score: motor, rotat, drive, devic, collim, inspect, move 
-Topic 27 Top Words:
- 	 Highest Prob: flow, connect, pipe, filter, inlet, fluid, outlet 
- 	 FREX: flow, filter, inlet, pipe, connect, outlet, central 
- 	 Lift: filter, flow, inlet, outlet, passag, pipe, connect 
- 	 Score: filter, flow, pipe, outlet, inlet, connect, fluid 
-Topic 28 Top Words:
- 	 Highest Prob: ion, isotop, exchang, shell, materi, product, column 
- 	 FREX: isotop, ion, column, shell, suitabl, capsul, zone 
- 	 Lift: column, isotop, ion, suitabl, zone, shell, press 
- 	 Score: column, isotop, ion, exchang, shell, product, wast 
-Topic 29 Top Words:
- 	 Highest Prob: radiat, neutron, sourc, includ, structur, detector, segment 
- 	 FREX: neutron, segment, radiat, array, sourc, type, emiss 
- 	 Lift: common, segment, gamma, emiss, array, type, neutron 
- 	 Score: radiat, common, neutron, sourc, detector, scatter, segment 
-Topic 30 Top Words:
- 	 Highest Prob: beam, particl, magnet, field, direct, acceler, irradi 
- 	 FREX: magnet, field, particl, beam, acceler, electromagnet, deflect 
- 	 Lift: deflect, magnet, electromagnet, field, acceler, charg, beam 
- 	 Score: beam, deflect, magnet, particl, field, charg, acceler 
+ 	 Highest Prob: layer, materi, form, includ, surfac, metal, composit 
+ 	 FREX: layer, coat, ceram, alloy, sinter, oxid, composit 
+ 	 Lift: tungsten, coat, alloy, carbid, ceram, cr, matrix 
+ 	 Score: layer, tungsten, coat, ceram, film, oxid, alloy 
