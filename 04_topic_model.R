@@ -63,7 +63,6 @@ myout <-prepDocuments(mypreprocess$documents,
                       mypreprocess$vocab, mypreprocess$meta,
                       lower.thresh = nrow(data_topic)/100)
 myout$vocab
-capture.output(myout$vocab, file=paste0("results/vocab",Sys.time(),".txt"))
 
 # Dummy variables for countries
 for(country in top_countries){

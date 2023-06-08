@@ -1,0 +1,100 @@
+Topic 1 Top Words:
+ 	 Highest Prob: materi, system, method, product, wast, biomass, process 
+ 	 FREX: system, biomass, materi, product, method, hazard, wast 
+ 	 Lift: municip, biomass, anim, hazard, system, product, method 
+ 	 Score: municip, materi, biomass, wast, system, method, product 
+Topic 2 Top Words:
+ 	 Highest Prob: metal, liquid, compris, form, temperatur, composit, hydrogen 
+ 	 FREX: metal, alloy, composit, liquid, carbon, ceram, adsorb 
+ 	 Lift: adsorb, alloy, metal, ceram, corros, composit, carbon 
+ 	 Score: adsorb, metal, liquid, composit, alloy, powder, hydrogen 
+Topic 3 Top Words:
+ 	 Highest Prob: reactor, nuclear, core, oper, fission, includ, embodi 
+ 	 FREX: core, fission, reactor, nuclear, reactiv, oper, instrument 
+ 	 Lift: fission, core, refuel, reactiv, cycl, reactor, nuclear 
+ 	 Score: fission, reactor, nuclear, core, oper, reactiv, refuel 
+Topic 4 Top Words:
+ 	 Highest Prob: layer, surfac, substrat, reflect, light, form, includ 
+ 	 FREX: layer, substrat, reflect, film, surfac, coat, multilay 
+ 	 Lift: multilay, layer, substrat, reflect, film, collector, coat 
+ 	 Score: multilay, layer, substrat, reflect, mirror, surfac, film 
+Topic 5 Top Words:
+ 	 Highest Prob: magnet, field, plasma, ion, electr, electron, coil 
+ 	 FREX: magnet, plasma, coil, electrod, fusion, field, electromagnet 
+ 	 Lift: coil, magnet, plasma, electrod, voltag, fusion, cathod 
+ 	 Score: coil, magnet, plasma, field, ion, electrod, fusion 
+Topic 6 Top Words:
+ 	 Highest Prob: imag, detector, ray, plural, grate, grid, arrang 
+ 	 FREX: imag, grate, detector, scatter, diffract, grid, illumin 
+ 	 Lift: grate, imag, diffract, illumin, scatter, sheet, detector 
+ 	 Score: grate, imag, ray, detector, diffract, grid, scatter 
+Topic 7 Top Words:
+ 	 Highest Prob: contain, storag, caviti, transfer, shell, air, canist 
+ 	 FREX: storag, caviti, canist, shell, contain, air, transfer 
+ 	 Lift: canist, cask, storag, caviti, shell, air, lift 
+ 	 Score: cask, storag, contain, canist, spent, caviti, air 
+Topic 8 Top Words:
+ 	 Highest Prob: neutron, chamber, generat, beam, absorb, moder, vacuum 
+ 	 FREX: neutron, chamber, moder, vacuum, absorb, proton, reaction 
+ 	 Lift: moder, neutron, vacuum, chamber, proton, absorb, compact 
+ 	 Score: moder, neutron, chamber, beam, proton, vacuum, reaction 
+Topic 9 Top Words:
+ 	 Highest Prob: fuel, assembl, rod, nuclear, includ, element, salt 
+ 	 FREX: rod, fuel, assembl, clad, pellet, salt, molten 
+ 	 Lift: pellet, clad, rod, fuel, bundl, assembl, molten 
+ 	 Score: pellet, fuel, rod, assembl, clad, nuclear, salt 
+Topic 10 Top Words:
+ 	 Highest Prob: signal, measur, time, detect, determin, base, output 
+ 	 FREX: signal, measur, determin, time, monitor, calcul, output 
+ 	 Lift: mask, signal, calcul, measur, valu, monitor, indic 
+ 	 Score: mask, signal, measur, detect, determin, output, calcul 
+Topic 11 Top Words:
+ 	 Highest Prob: radiat, element, structur, scintil, includ, embodi, shield 
+ 	 FREX: scintil, radiat, element, crystal, panel, attenu, structur 
+ 	 Lift: scintil, panel, crystal, attenu, radiat, element, barrier 
+ 	 Score: scintil, radiat, element, crystal, panel, attenu, shield 
+Topic 12 Top Words:
+ 	 Highest Prob: particl, irradi, beam, charg, acceler, posit, treatment 
+ 	 FREX: particl, charg, irradi, acceler, target, treatment, disclosur 
+ 	 Lift: target, particl, charg, holder, irradi, acceler, treatment 
+ 	 Score: target, particl, beam, irradi, charg, acceler, treatment 
+Topic 13 Top Words:
+ 	 Highest Prob: heat, water, cool, fluid, flow, coolant, steam 
+ 	 FREX: steam, pipe, heat, coolant, fluid, cool, tank 
+ 	 Lift: turbin, tank, pipe, steam, loop, condens, pump 
+ 	 Score: turbin, steam, heat, water, coolant, pipe, cool 
+Topic 14 Top Words:
+ 	 Highest Prob: ray, beam, sourc, collim, electron, direct, filter 
+ 	 FREX: collim, ray, sampl, apertur, sourc, angl, filter 
+ 	 Lift: spot, focal, collim, focus, window, apertur, angl 
+ 	 Score: spot, ray, collim, beam, sourc, electron, focal 
+Topic 15 Top Words:
+ 	 Highest Prob: energi, power, modul, electr, laser, generat, sourc 
+ 	 FREX: energi, modul, laser, convert, power, medium, electr 
+ 	 Lift: medium, laser, convert, modul, energi, convers, compress 
+ 	 Score: medium, energi, power, laser, modul, electr, convert 
+Topic 16 Top Words:
+ 	 Highest Prob: radioact, solut, separ, isotop, step, includ, oxid 
+ 	 FREX: solut, acid, isotop, radionuclid, radioact, separ, contamin 
+ 	 Lift: acid, aqueous, solut, dissolv, decontamin, reduct, resin 
+ 	 Score: acid, solut, radioact, isotop, oxid, resin, aqueous 
+Topic 17 Top Words:
+ 	 Highest Prob: devic, includ, posit, shield, oper, drive, configur 
+ 	 FREX: devic, drive, inspect, mechan, move, room, shield 
+ 	 Lift: room, track, user, devic, remot, inspect, actuat 
+ 	 Score: room, devic, shield, drive, inspect, oper, posit 
+Topic 18 Top Words:
+ 	 Highest Prob: portion, tube, bodi, member, open, surfac, includ 
+ 	 FREX: member, tube, portion, guid, bodi, open, hole 
+ 	 Lift: plug, member, weld, guid, longitudin, tube, ring 
+ 	 Score: plug, tube, member, portion, rotat, open, bodi 
+Topic 19 Top Words:
+ 	 Highest Prob: vessel, plate, lower, wall, pressur, upper, structur 
+ 	 FREX: plate, upper, lower, vessel, wall, head, flang 
+ 	 Lift: flang, upper, plate, head, conduit, lower, cylindr 
+ 	 Score: flang, vessel, plate, upper, pressur, lower, wall 
+Topic 20 Top Words:
+ 	 Highest Prob: compon, optic, cell, light, trap, atom, cabl 
+ 	 FREX: cell, compon, optic, fiber, trap, cabl, atom 
+ 	 Lift: fiber, cell, cold, compon, cabl, trap, optic 
+ 	 Score: fiber, optic, compon, cell, trap, light, cabl 
