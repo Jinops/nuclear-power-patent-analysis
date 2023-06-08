@@ -71,15 +71,17 @@ for(country in top_countries){
 }
 myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
 
-## Find best topic count
-# topic_counts <- c(10, 30, 50) 
-# kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
-#                    topic_counts, 
-#                    prevalence = prevalence,
-#                    seed = 16)
-# plot(kresult)
+# Find best topic count
+topic_counts <- c(8, 16, 20, 25, 30)
+kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
+                   topic_counts,
+                   prevalence = prevalence,
+                   seed = 16)
+plot(kresult) # Residuals: Lower Better / The others: Higher Better
 
 # STM
+topic_count = 20
+
 mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
              K=topic_count,
              prevalence = prevalence,
@@ -90,7 +92,7 @@ plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
 # topic
 topics = labelTopics(mystm, topics=1:topic_count, n=7)
 print(topics)
-sink(file=paste0(result_path, 'topic.txt'))
+sink(file=paste0(result_path, 'topic_c', topic_count, '.txt'))
 topics
 sink()
 
@@ -103,8 +105,8 @@ write.csv(reg_result, file=paste0(result_path, "reg.csv"))
 # reg_cross
 estimate_cross <- estimateEffect(reg_cross, mystm, myout$meta)
 result_cross = summary(estimate_cross)
-reg_cross_result = result[3]$tables
-write.csv(reg_result, file=paste0(result_path, "reg_cross.csv"))
+reg_cross_result = result_cross[3]$tables
+write.csv(reg_cross_result, file=paste0(result_path, "reg_cross.csv"))
 sink(file=paste0(result_path, "reg_cross.txt"))
 reg_cross_result
 sink()
