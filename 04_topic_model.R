@@ -9,7 +9,6 @@ library(stopwords)
 prevalence =  ~ year + US + JP + KR + FR + DE 
 reg = c(1:topic_count) ~ year + US + JP + KR + FR + DE
 reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + DE + year:US + year:JP + year:KR + year:FR + year:DE
-#reg_cross = lm(c(1:topic_count) ~ year + US + JP + KR + FR + DE  + year:US + year:JP + year:KR + year:FR + year:DE, data=myout$meta)
 
 sprintf('< %s >', data_about)
 result_path = paste0("results/",tolower(data_about),"s/")
@@ -88,14 +87,21 @@ mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
              seed = 16)
 
 plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
-#plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
-labelTopics(mystm, topics=1:topic_count, n=7)
 
+# topic
+topics = labelTopics(mystm, topics=1:topic_count, n=7)
+topics
+sink(file=paste0(result_path, 'topic.txt'))
+topics
+sink()
+
+# reg
 estimate <- estimateEffect(reg, mystm, myout$meta)
 result = summary(estimate)
 reg_result = result[3]$tables
 write.csv(reg_result, file=paste0(result_path, "reg.csv"))
 
+# reg_cross
 estimate_cross <- estimateEffect(reg_cross, mystm, myout$meta)
 result_cross = summary(estimate_cross)
 reg_cross_result = result[3]$tables
