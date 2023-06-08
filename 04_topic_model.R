@@ -10,6 +10,12 @@ prevalence =  ~ year + US + JP + KR + FR + DE
 reg = c(1:topic_count) ~ year + US + JP + KR + FR + DE
 reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + DE + year:US + year:JP + year:KR + year:FR + year:DE
 
+## KR
+#prevalence =  ~ year + KR
+#reg = c(1:topic_count) ~ year + KR + nonKR
+#reg_cross = c(1:topic_count) ~ year + KR + year:KR
+
+
 sprintf('< %s >', data_about)
 result_path = paste0("results/",tolower(data_about),"s/")
 
@@ -69,6 +75,11 @@ for(country in top_countries){
   myout$meta[country] <- ifelse(myout$meta$country == country, 1, 0)
 }
 myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
+
+## Dummy - KOR
+#myout$meta$KR <- ifelse(myout$meta$country == 'KR', 1, 0)
+#myout$meta$nonKR <- ifelse(myout$meta$country == 'KR', 0, 1)
+
 
 # Find best topic count
 topic_counts <- c(8, 16, 20, 25, 30)
