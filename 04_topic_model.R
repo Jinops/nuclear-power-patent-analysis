@@ -11,8 +11,11 @@ reg = c(1:topic_count) ~ year + US + JP + KR + FR + DE
 reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + DE + year:US + year:JP + year:KR + year:FR + year:DE
 #reg_cross = lm(c(1:topic_count) ~ year + US + JP + KR + FR + DE  + year:US + year:JP + year:KR + year:FR + year:DE, data=myout$meta)
 
-data_topic <- data
+sprintf('< %s >', data_about)
+result_path = paste0("results/",tolower(data_about),"s/")
 
+data_topic <- data
+data_topic$text = paste(data_topic$patent_tilte, " ", data_topic$patent_abstract)
 data_topic$text <- str_replace_all(data_topic$text, '-', ' a ')
 
 stopwords <- stopwords(language = "en", source = "smart")
@@ -20,7 +23,7 @@ stopwords_add <- c('invention', 'thereof', 'therefore', 'therefrom')
 stopwords <- c(stopwords, stopwords_add)
 
 # Preprocessing - textProcessor
-library(tm)
+mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("year", "country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
                               , customstopwords = stopwords
@@ -90,25 +93,24 @@ labelTopics(mystm, topics=1:topic_count, n=7)
 
 estimate <- estimateEffect(reg, mystm, myout$meta)
 result = summary(estimate)
-print(result[3]$tables)
-write.csv(result[3]$tables,file=paste0("results/effect_",Sys.time(),".csv"))
+reg_result = result[3]$tables
+write.csv(reg_result, file=paste0(result_path, "reg.csv"))
 
 estimate_cross <- estimateEffect(reg_cross, mystm, myout$meta)
 result_cross = summary(estimate_cross)
-print(result_cross[3]$tables)
-write.csv(result_cross[3]$tables,file=paste0("results/effect_cross_",Sys.time(),".csv"))
-print(result_cross[3]$tables)
+reg_cross_result = result[3]$tables
+write.csv(reg_result, file=paste0(result_path, "reg_cross.csv"))
 
 # Beta
 logbeta <- as.data.frame(mystm[["beta"]][["logbeta"]][[1]])
 beta <- as.data.frame(exp(logbeta))
 colnames(beta) <- myout$vocab
 colnames(logbeta) <- myout$vocab
-write.csv(beta, file=paste0("results/beta_",Sys.time(),".csv"), row.names=TRUE)
-write.csv(logbeta, file=paste0("results/logbeta_",Sys.time(),".csv"), row.names=TRUE)
+write.csv(beta, file=paste0(result_path,"beta.csv"))
+write.csv(logbeta, file=paste0(result_path,"log_beta.csv"))
 
 # Theta
 theta <- as.data.frame(mystm[["theta"]])
-theta <- cbind(theta, data["application_title"], data["year"], data["country"])
-write.csv(theta, file=paste0("results/theta_",Sys.time(),".csv"), row.names=TRUE)
+theta <- cbind(theta, data$patent_title, data$year, data$country)
+write.csv(logbeta, file=paste0(result_path,"theta.csv"), row.names = TRUE)
 
