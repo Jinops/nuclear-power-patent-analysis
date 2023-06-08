@@ -1,3 +1,7 @@
+install.packages(stm)
+install.packages(stringr)
+install.packages(stopwords)
+
 library(stm)
 library(stringr)
 library(stopwords)
@@ -68,13 +72,13 @@ for(country in top_countries){
 }
 myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
 
-# Find best topic count
-topic_counts <- c(10, 30, 50) 
-kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
-                   topic_counts, 
-                   prevalence = prevalence,
-                   seed = 16)
-plot(kresult)
+## Find best topic count
+# topic_counts <- c(10, 30, 50) 
+# kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
+#                    topic_counts, 
+#                    prevalence = prevalence,
+#                    seed = 16)
+# plot(kresult)
 
 # STM
 topic_count <- 30
@@ -84,7 +88,7 @@ mystm <- stm(myout$documents, myout$vocab, data=myout$meta,
              seed = 16)
 
 plot(mystm, type = "summary", labeltype = "prob", text.cex = 1)
-plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
+#plot(mystm, type = "labels", labeltype = "prob", text.cex = 1)
 labelTopics(mystm, topics=1:topic_count, n=7)
 
 estimate <- estimateEffect(reg, mystm, myout$meta)
@@ -96,6 +100,7 @@ estimate_cross <- estimateEffect(reg_cross, mystm, myout$meta)
 result_cross = summary(estimate_cross)
 print(result_cross[3]$tables)
 write.csv(result_cross[3]$tables,file=paste0("results/effect_cross_",Sys.time(),".csv"))
+print(result_cross[3]$tables)
 
 # Beta
 logbeta <- as.data.frame(mystm[["beta"]][["logbeta"]][[1]])
