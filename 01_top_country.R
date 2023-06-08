@@ -1,4 +1,4 @@
-title <- sprintf("TOP%d counties\n(%s)", max, file_name)
+title <- sprintf("< %s > %s\n TOP%d counties", data_about, file_name, max)
 country_table <- table(data$country)
 print(country_table)
 country_table_sorted <- sort(country_table, decreasing=TRUE)

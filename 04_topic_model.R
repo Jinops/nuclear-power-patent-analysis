@@ -6,15 +6,13 @@ library(stm)
 library(stringr)
 library(stopwords)
 
-prevalence =  ~ app_year + US + JP + KR + FR + DE 
-reg = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE
-reg_cross = c(1:topic_count) ~ app_year + US + JP + KR + FR + DE + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE
-#reg_cross = lm(c(1:topic_count) ~ app_year + US + JP + KR + FR + DE  + app_year:US + app_year:JP + app_year:KR + app_year:FR + app_year:DE, data=myout$meta)
+prevalence =  ~ year + US + JP + KR + FR + DE 
+reg = c(1:topic_count) ~ year + US + JP + KR + FR + DE
+reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + DE + year:US + year:JP + year:KR + year:FR + year:DE
+#reg_cross = lm(c(1:topic_count) ~ year + US + JP + KR + FR + DE  + year:US + year:JP + year:KR + year:FR + year:DE, data=myout$meta)
 
 data_topic <- data
-top_countries = names(country_table_top)
 
-data_topic$text <- paste(data_topic$patent_title, " ", data_topic$patent_abstract)
 data_topic$text <- str_replace_all(data_topic$text, '-', ' a ')
 
 stopwords <- stopwords(language = "en", source = "smart")
@@ -23,7 +21,6 @@ stopwords <- c(stopwords, stopwords_add)
 
 # Preprocessing - textProcessor
 library(tm)
-mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
                               , customstopwords = stopwords
@@ -50,7 +47,7 @@ stopwords_add <- c(stopwords_add, "comput", "conduct", "contrast", "cost", "data
 stopwords_add <- c(stopwords_add, "inside", "intense", "interior", "introduc", "later", "lock", "longitudin", "main", "mean")
 stopwords <- c(stopwords, stopwords_add) 
 
-mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("app_year", "country")]
+mypreprocess <- textProcessor(data_topic$text, metadata = data_topic[c("year", "country")]
                               , lowercase = TRUE
                               , removepunctuation = TRUE
                               , customstopwords = stopwords #TODO: it may not work
@@ -112,6 +109,6 @@ write.csv(logbeta, file=paste0("results/logbeta_",Sys.time(),".csv"), row.names=
 
 # Theta
 theta <- as.data.frame(mystm[["theta"]])
-theta <- cbind(theta, data["patent_title"], data["app_year"], data["country"])
+theta <- cbind(theta, data["application_title"], data["year"], data["country"])
 write.csv(theta, file=paste0("results/theta_",Sys.time(),".csv"), row.names=TRUE)
 
