@@ -28,3 +28,4 @@ for(file_name_loop in file_names){
 }
 print('finish! - Applications')
 
+rm(file_name_loop)

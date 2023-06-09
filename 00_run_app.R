@@ -2,7 +2,7 @@ library(jsonlite)
 library(colorspace)
 
 # Parameters
-file_name <- "All"
+file_name <- "G21B"
 is_pdf <- TRUE
 max <- 5 # TOP countries number
 data_about = 'Application'
@@ -22,10 +22,12 @@ sprintf('count of column: %d', ncol(data))
 print(names(data))
 
 # Preprocessing
-data$year <- data$published_date
+data$year <- as.numeric(substr(data$published_date, 1, 4))
 data$country <- data$disambig_country
 data$patent_title <- data$application_title
 data$patent_abstract <- data$application_abstract
+
+data <- data[data$year >= 2016,]
 
 source("01_top_country.R")
 
