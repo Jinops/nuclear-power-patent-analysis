@@ -1,14 +1,23 @@
-install.packages(stm)
-install.packages(stringr)
-install.packages(stopwords)
+#install.packages(stm)
+#install.packages(stringr)
+#install.packages(stopwords)
 
-library(stm)
-library(stringr)
-library(stopwords)
+#library(stm)
+#library(stringr)
+#library(stopwords)
 
-prevalence =  ~ year + US + JP + KR + FR + DE 
-reg = c(1:topic_count) ~ year + US + JP + KR + FR + DE
-reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + DE + year:US + year:JP + year:KR + year:FR + year:DE
+if(data_about == 'Registration'){
+  top_countries = c('US', 'JP', 'DE', 'FR', 'KR')
+  prevalence =  ~ US + JP + DE + FR + KR 
+  reg = c(1:topic_count) ~ US + JP + DE + FR + KR
+  reg_cross = c(1:topic_count) ~ year + US + JP + DE + FR + KR + year:US + year:JP + year:DE + year:FR + year:KR
+}
+if(data_about == 'Application'){
+  top_countries = c('US', 'JP', 'KR', 'FR', 'CN')
+  prevalence =  ~ US + JP + KR + FR + CN 
+  reg = c(1:topic_count) ~ US + JP + KR + FR + CN
+  reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + CN + year:US + year:JP + year:KR + year:FR + year:CN
+}
 
 ## KR
 #prevalence =  ~ year + KR
