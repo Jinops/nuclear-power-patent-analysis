@@ -26,7 +26,7 @@ if(data_about == 'Application'){
 
 
 sprintf('< %s >', data_about)
-result_path = paste0("results/",tolower(data_about),"s/")
+result_path = paste0("topics/",tolower(data_about),"s/")
 
 data_topic <- data
 data_topic$text = paste(data_topic$patent_tilte, " ", data_topic$patent_abstract)

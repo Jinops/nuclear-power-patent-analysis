@@ -10,11 +10,21 @@ file_names <- list(
 )
 file_names <- append(file_names, 'All')
 
+# Registrations
 for(file_name_loop in file_names){
   print('=====')
   print(file_name_loop)
   print('=====')
-  source("run_regist.R")
-  #source("run_app.R")
+  source("00_run_regist.R")
 }
-print('finish!')
+print('finish! - Registrations')
+
+# Applications
+for(file_name_loop in file_names){
+  print('=====')
+  print(file_name_loop)
+  print('=====')
+  source("00_run_app.R")
+}
+print('finish! - Applications')
+
