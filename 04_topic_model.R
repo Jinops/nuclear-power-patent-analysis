@@ -81,13 +81,13 @@ myout$meta$etc <- ifelse(myout$meta$country %in% top_countries, 0, 1)
 #myout$meta$nonKR <- ifelse(myout$meta$country == 'KR', 0, 1)
 
 
-# Find best topic count
-topic_counts <- c(8, 16, 20, 25, 30)
-kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
-                   topic_counts,
-                   prevalence = prevalence,
-                   seed = 16)
-plot(kresult) # Residuals: Lower Better / The others: Higher Better
+# # Find best topic count
+# topic_counts <- c(8, 16, 20, 25, 30)
+# kresult <- searchK(myout$documents, myout$vocab, data=myout$meta,
+#                    topic_counts,
+#                    prevalence = prevalence,
+#                    seed = 16)
+# plot(kresult) # Residuals: Lower Better / The others: Higher Better
 
 # STM
 topic_count = 20
@@ -132,5 +132,5 @@ write.csv(logbeta, file=paste0(result_path,"log_beta.csv"))
 # Theta
 theta <- as.data.frame(mystm[["theta"]])
 theta <- cbind(theta, data$patent_title, data$year, data$country)
-write.csv(logbeta, file=paste0(result_path,"theta.csv"), row.names = TRUE)
+write.csv(theta, file=paste0(result_path,"theta.csv"), row.names = TRUE)
 
