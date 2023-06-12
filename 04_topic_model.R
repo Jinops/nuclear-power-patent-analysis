@@ -18,7 +18,6 @@ if(data_about == 'Application'){
   reg = c(1:topic_count) ~ US + JP + KR + FR + CN
   reg_cross = c(1:topic_count) ~ year + US + JP + KR + FR + CN + year:US + year:JP + year:KR + year:FR + year:CN
 }
-
 ## KR
 #prevalence =  ~ year + KR
 #reg = c(1:topic_count) ~ year + KR + nonKR
@@ -31,6 +30,7 @@ result_path = paste0("topics/",tolower(data_about),"s/")
 data_topic <- data
 data_topic$text = paste(data_topic$patent_tilte, " ", data_topic$patent_abstract)
 data_topic$text <- str_replace_all(data_topic$text, '-', ' a ')
+data_topic$year = data_topic$year-2016
 
 stopwords <- stopwords(language = "en", source = "smart")
 stopwords_add <- c('invention', 'thereof', 'therefore', 'therefrom')
