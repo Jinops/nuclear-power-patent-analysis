@@ -4,8 +4,7 @@ Patent Analysis on Nuclear Power using a Topic Model.
 
 토픽모델을 이용한 한국의 원전 기술 특허 분석
 
-![thumbnail](/img_graph.png)
-
+<img src="/img_graph.png" width="600px">
 
 ## 목적
 
